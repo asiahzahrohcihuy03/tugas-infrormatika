@@ -1,0 +1,36 @@
+def daftar_alel(kode):
+    return [True] * kode + [False] * (2 - kode)
+
+
+def buat_gamet(sifat_induk):
+    alel_tinggi = daftar_alel(sifat_induk[0])
+    alel_anak = daftar_alel(sifat_induk[1])
+
+    return [
+        (tinggi, anak)
+        for tinggi in alel_tinggi
+        for anak in alel_anak
+    ]
+
+
+def kode_keturunan(alel1, alel2):
+    jumlah_dominan = int(alel1) + int(alel2)
+    return jumlah_dominan  # 2 = dominan murni, 1 = campuran, 0 = resesif murni
+
+
+def main():
+    induk1 = list(map(int, input().split()))
+    induk2 = list(map(int, input().split()))
+
+    gamet1 = buat_gamet(induk1)
+    gamet2 = buat_gamet(induk2)
+
+    for g1 in gamet1:
+        for g2 in gamet2:
+            tinggi = kode_keturunan(g1[0], g2[0])
+            jumlah_anak = kode_keturunan(g1[1], g2[1])
+            print(tinggi, jumlah_anak)
+
+
+if __name__ == "__main__":
+    main()
